@@ -1,0 +1,68 @@
+body{
+	padding:0;
+	margin:0;
+}
+#header{
+	height:82px;
+	background:#FFF url(../images/header_bg.gif) repeat-x;
+}
+.site_links li{
+	margin-top:40px;
+	float:left;
+	margin-right:20px;
+	list-style-type:none;
+	background:url(../images/header_link_icon.gif) no-repeat;
+	line-height: 20px;
+	padding-left:28px;
+}
+.site_links li img{
+	vertical-align:middle;
+}
+.site_links li a{
+	display:block;
+	text-decoration:none;
+	color:#575757;
+}
+.site_links li a:hover{
+	color:#005BAC;
+}
+#main_nav{
+	background:url(../images/main_nav_bg.gif) repeat-x;
+	text-align:center;
+}
+#main_nav #main_nav_news{
+	margin-left:5px;
+}
+#main_nav a{
+	height:16px;
+	display:block;
+}
+#main_nav a,#main_nav img{
+	float:left;
+	border:0;
+	margin:0;
+}
+#boards{
+	background:#CFEBF8;
+}
+#boards_product,#boards_door{
+	width:908px;
+	margin-top:8px;
+	margin-bottom:8px;
+	border:2px #CCC solid;
+	background:#FFF;
+}
+#boards_product div{
+	float:left;
+	margin:5px 5px 5px 10px;
+}
+#boards_door div{
+	border:1px #CCC solid;
+	padding:5px;
+	float:left;
+	margin:5px 5px 5px 10px;
+}
+#boards_door div hr.dotted{
+	color:#FFF;
+	border-top:1px #CCC dashed;
+}
