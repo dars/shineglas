@@ -46,14 +46,39 @@ function show_Growl(type,title,string){
 		});
 	}
 }
-function show_info_tab(category,str){
+function show_info_tab(category,str,id){
 	tp.get(0).setTitle('文字簡介 - '+str);
 	tp.activate(0);
 	wel_form.getForm().el.mask('資料讀取中','x-mask-loading');
-	ds.load({params:{id:category,ps:'',type:'',lang:''}});
-	node_title.show();
-	lang_combo.show();
-	title_combo.setReadOnly(true);
+	//titles_store.baseParams.category = category;
+	titles_store.load({params:{category:category}});
+	titles_store.on('load',function(){
+		ds.load({params:{id:id,ps:'',type:'',lang:''}});
+		node_title.show();
+		lang_combo.show();
+		title_combo.setReadOnly(true);
+	});
+}
+function show_info2_tab(category,str){
+	tp.get(0).setTitle(str);
+	tp.activate(0);
+	titles_store.baseParams.category = category;
+	titles_store.load();
+	titles_store.on('load',function(){
+		if(titles_store.getCount()<1){
+			show_taxo_tab(category,str,'zhtw');
+			show_Growl(2,'警告','尚未設定分類，請先設定類別');
+		}else{
+			title_combo.setValue(titles_store.getAt(0).id);
+			lang_combo.hide();
+			wel_form.getForm().el.mask('資料讀取中','x-mask-loading');
+			ds.baseParams.type = titles_store.getAt(0).id;
+			ds.baseParams.lang = 'zhtw';
+			ds.load();
+			node_title.hide();
+			title_combo.setReadOnly(false);
+		}
+	});
 }
 function show_taxo_tab(category,str,lang){
 	tp.body.mask('資料讀取中','x-mask-loading');
@@ -63,7 +88,6 @@ function show_taxo_tab(category,str,lang){
 		tabItem = tp.add({
 			id:'taxonomy',
 			title:'分類設定 - '+str,
-			closable:true,
 			items:[taxo_tree],
 			autoScroll:true
 		});
@@ -80,11 +104,27 @@ function show_news_tab(category){
 		tabItem = tp.add({
 			id:'news',
 			title:'最新消息',
-			closable:true,
 			items:[news_grid],
 			autoScroll:true
 		});
 	}
 	news_ds.load({params:{start:0,limit:20}});
 	tp.activate('news');
+}
+function show_prod_tab(category,str){
+	//prod_form.getForm().reset();
+	tp.body.mask('資料讀取中','x-mask-loading');
+	prod_titles_store.load({params:{category:category}});
+	var tabItem = tp.getItem('product');
+	if(tabItem !== null){
+		tabItem = tp.add({
+			id:'product',
+			title:str,
+			items:[prod_panel],
+			autoScroll:true
+		});
+	}
+	
+	tp.activate('product');
+	tp.body.unmask();
 }

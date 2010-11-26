@@ -8,7 +8,7 @@ var titles_store = new Ext.data.Store({
 			{name:'id'}
 		])
 });
-titles_store.load({params:{category:'summary'}});
+//titles_store.load({params:{category:'summary'}});
 
 var title_combo = new Ext.form.ComboBox({
 	fieldLabel:'類別',
@@ -50,7 +50,7 @@ lang_combo.on('select',function(){
 	ds.baseParams.ps='summary';
 	ds.baseParams.type = title_combo.getValue();
 	ds.baseParams.lang = lang_combo.getValue();
-	ds.load();
+	ds.load({params:{id:''}});
 });
 var node_title = new Ext.form.TextField({
 	fieldLabel:'標題',
@@ -114,6 +114,10 @@ var wel_form = new Ext.form.FormPanel({
 		}
 	}]
 });
+var ini=0;
 wel_form.on('activate',function(){
-	ds.load({params:{id:27}});	
+	if(ini == 0){
+		show_info_tab('summary','首頁歡迎',27);
+		ini=1;
+	}
 });

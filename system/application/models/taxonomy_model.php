@@ -16,7 +16,7 @@ class taxonomy_model extends Model{
 		$tmp['category']=$category;
 		$tmp['lang']=$lang;
 		$this->db->insert('taxonomies',$tmp);
-		if($category == 'sys' || $category == 'product' || $category == 'project'){
+		if($category == 'case' || $category == 'case2' || $category == 'product' || $category == 'product2'){
 			$tmp = array();
 			$tmp['title']=$name;
 			$tmp['type']=$this->db->insert_id();

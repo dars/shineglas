@@ -49,10 +49,23 @@ class Admin extends Controller{
 	function save_node_content(){
 		$this->db->where('id',$this->input->post('id'));
 		$tmp=array();
-		$tmp['title']=$this->input->post('title');
+		if($this->input->post('title')){
+			$tmp['title']=$this->input->post('title');
+		}
 		$tmp['content']=$this->input->post('content');
+		if($this->input->post('content2')){
+			$tmp['content2']=$this->input->post('content2');
+		}
 		$tmp['modified']=date('Y-m-d H:i:s');
 		$this->db->update('nodes',$tmp);
+	}
+	function get_prod_pix(){
+		$this->db->where('hash_id',$this->input->post('hash_id'));
+		$this->db->where('file_type','pix');
+		$query = $this->db->get('files');
+		$res=new stdClass();
+		$res->root = $query->result_array();
+		echo json_encode($res);
 	}
 	function get_taxonomy_list(){
 		$params=explode('_',$this->input->post('node'));
@@ -126,5 +139,36 @@ class Admin extends Controller{
 		$tmp['created'] = date('Y-m-d H:i:s');
 		$tmp['modified'] = date('Y-m-d H:i:s');
 		$this->db->insert('boards',$tmp);
+	}
+	function upload_prod_pix(){
+		$config['upload_path']='public/files/';
+		$config['allowed_types']='gif|jpg|jpeg|png|bmp';
+		$config['max_size']='1000';
+		$this->load->library('upload',$config);
+		if(!$this->upload->do_upload()){
+			$i=1;
+			while($i<=5){
+				if($this->upload->do_upload('ppix'.$i)){
+					$data=$this->upload->data();
+					$tmp = array();
+					$tmp['name']=$data['file_name'];
+					$tmp['file_type']='pix';
+					$tmp['category']='product';
+					$tmp['hash_id']=$this->input->post('pptype');
+					$tmp['created']=date('Y-m-d H:i:s');
+					$tmp['modified']=date('Y-m-d H:i:s');
+					$this->db->insert('files',$tmp);
+					
+					$fp=fopen('public/files/debug','a+');
+					if($fp){
+						fputs($fp,json_encode($data['file_name']).' '.$this->input->post('type')."\n\n");
+						fclose($fp);
+					}
+					
+				}
+				$i++;
+			}
+		}
+		echo '{success:true}';
 	}
 }
