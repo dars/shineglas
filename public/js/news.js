@@ -5,7 +5,8 @@ var news_rec = new Ext.data.Record.create([
 	{name:'created'},
 	{name:'modified'},
 	{name:'lang'},
-	{name:'cname'}
+	{name:'cname'},
+	{name:'category'}
 ]);
 
 var news_ds = new Ext.data.JsonStore({
@@ -29,7 +30,7 @@ var news_cm = new Ext.grid.ColumnModel([
 	{header:'更新時間',dataIndex:'modified'},
 	{header:'語系',dataIndex:'lang'}
 ]);
-
+var edit_record;
 var news_grid = new Ext.grid.GridPanel({
 	store:news_ds,
 	cm:news_cm,
@@ -46,16 +47,28 @@ var news_grid = new Ext.grid.GridPanel({
 	tbar:new Ext.Toolbar([{
 			text:'新增',
 			handler:function(){
+				news_form.getForm().reset();
+				news_combo.setDisabled(true);
+				news_form.buttons[0].setText('新增');
 				news_form_win.show();
+				CKEDITOR.instances.content.setData('');
+			}
+		},{
+			text:'編輯',
+			handler:function(){
+				var sm = news_grid.getSelectionModel();
+				edit_record = sm.getSelected();
+				news_taxo_ds.baseParams.lang = edit_record.data.lang;
+				news_taxo_ds.load();
+				news_taxo_ds.on('load',setEditData);
 			}
 		},{
 			text:'刪除',
 			handler:function(){
 				Ext.Msg.confirm('訊息','確定要刪除？',function(btn){
 					if(btn == 'yes'){
-						var sm = grid.getSelectionModel();	// 取得grid
-						var cell = sm.getSelectedCell();	// 取得選取cell
-						var record = store.getAt(cell[0]);	// 取得所在行號
+						var sm = news_grid.getSelectionModel();
+						var record = sm.getSelected();
 						news_ds.remove(record);
 					}
 				});
@@ -63,6 +76,16 @@ var news_grid = new Ext.grid.GridPanel({
 		}
 	])
 });
+function setEditData(){
+	news_form.buttons[0].setText('修改');
+	news_form.getForm().loadRecord(edit_record);
+	news_form_win.show();
+	news_taxo_ds.un('load',setEditData);
+}
+news_grid.on('celldblclick',function(g,r){
+	
+});
+
 var news_taxo_ds = new Ext.data.JsonStore({
 	proxy:new Ext.data.HttpProxy({
 		method:'post',
@@ -74,7 +97,7 @@ var news_taxo_ds = new Ext.data.JsonStore({
 		{name:'name'}
 	]
 });
-//news_taxo_ds.load();
+
 var news_combo = new Ext.form.ComboBox({
 	fieldLabel:'類別',
 	id:'news_combo',
@@ -127,12 +150,13 @@ var news_form = new Ext.form.FormPanel({
 		xtype:'ckeditor',
 		fieldLabel:'內容',
 		CKConfig:{
-			customConfig:'http://192.168.1.131/~Dars/shineglas/public/js/ckeditor/config.js'
+			customConfig:'http://192.168.1.131/~Dars/efg/public/js/ckeditor/config.js'
 		},
-		name:'content'
+		name:'content',
+		id:'content'
 	}],
 	buttons:[{
-		text:'儲存',
+		text:'新增',
 		handler:function(){
 			news_form.getForm().submit({
 				url:'news_save',
@@ -169,6 +193,7 @@ var news_form_win = new Ext.Window({
 	autoScroll:true,
 	modal:true,
 	closable:true,
+	closeAction:'hide',
 	items:[news_form]
 });
 news_form_win.hide();
