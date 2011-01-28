@@ -1,5 +1,7 @@
+var info_id;
+var info_cate;
+var info_str;
 Ext.onReady(function(){
-	Ext.BLANK_IMAGE_URL="../public/resources/images/default/s.gif";
 	Ext.QuickTips.init();
 	Ext.override(Ext.data.Store, {
 		storeOptions : function(o) {
@@ -17,7 +19,7 @@ Ext.onReady(function(){
 		items:[{
 			region:'north',
 			height:80,
-			html:"<div style='background:url(../public/images/header_bg.gif) repeat-x;padding:5px;'><img src='../public/images/admin_logo.png' /></div>"
+			html:"<div style='background:url("+base_url+"public/images/header_bg.gif) repeat-x;padding:5px;'><img src='"+base_url+"public/images/admin_logo.png' /></div>"
 		},tree,tp,{
 			region:'south',
 			height:30,
@@ -46,39 +48,48 @@ function show_Growl(type,title,string){
 		});
 	}
 }
+function info_tab1(){
+	ds.load({params:{id:info_id,ps:'',type:'',lang:''}});
+	node_title.show();
+	lang_combo.show();
+	title_combo.setReadOnly(true);
+}
+function info_tab2(){
+	if(titles_store.getCount()<1){
+		show_taxo_tab(info_cate,info_str,'zhtw');
+		show_Growl(2,'警告','尚未設定分類，請先設定分類');
+	}else{
+		title_combo.setValue(titles_store.getAt(0).id);
+		lang_combo.hide();
+		wel_form.getForm().el.mask('資料讀取中','x-mask-loading');
+		ds.baseParams.type = titles_store.getAt(0).id;
+		ds.baseParams.lang = 'zhtw';
+		ds.load();
+		node_title.hide();
+		title_combo.setReadOnly(false);
+	}
+}
 function show_info_tab(category,str,id){
+	info_id = id;
 	tp.get(0).setTitle('文字簡介 - '+str);
 	tp.activate(0);
 	wel_form.getForm().el.mask('資料讀取中','x-mask-loading');
 	//titles_store.baseParams.category = category;
+	titles_store.un('load',info_tab1);
+	titles_store.un('load',info_tab2);
+	titles_store.on('load',info_tab1);
 	titles_store.load({params:{category:category}});
-	titles_store.on('load',function(){
-		ds.load({params:{id:id,ps:'',type:'',lang:''}});
-		node_title.show();
-		lang_combo.show();
-		title_combo.setReadOnly(true);
-	});
 }
 function show_info2_tab(category,str){
+	info_cate = category;
+	info_str = str;
 	tp.get(0).setTitle(str);
 	tp.activate(0);
 	titles_store.baseParams.category = category;
+	titles_store.un('load',info_tab1);
+	titles_store.un('load',info_tab2);
+	titles_store.on('load',info_tab2);
 	titles_store.load();
-	titles_store.on('load',function(){
-		if(titles_store.getCount()<1){
-			show_taxo_tab(category,str,'zhtw');
-			show_Growl(2,'警告','尚未設定分類，請先設定類別');
-		}else{
-			title_combo.setValue(titles_store.getAt(0).id);
-			lang_combo.hide();
-			wel_form.getForm().el.mask('資料讀取中','x-mask-loading');
-			ds.baseParams.type = titles_store.getAt(0).id;
-			ds.baseParams.lang = 'zhtw';
-			ds.load();
-			node_title.hide();
-			title_combo.setReadOnly(false);
-		}
-	});
 }
 function show_taxo_tab(category,str,lang){
 	tp.body.mask('資料讀取中','x-mask-loading');

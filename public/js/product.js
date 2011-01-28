@@ -1,7 +1,7 @@
 var prod_store = new Ext.data.JsonStore({
 	proxy:new Ext.data.HttpProxy({
 		method:'post',
-		url:'get_node_content'
+		url:base_url+'admin/get_node_content'
 	}),
 	root:'root',
 	fields:[
@@ -25,7 +25,7 @@ prod_store.on('load',function(){
 var prod_titles_store = new Ext.data.JsonStore({
 	proxy: new Ext.data.HttpProxy({
 		method:'post',
-		url:'get_nodes_title'
+		url:base_url+'admin/get_nodes_title'
 	}),
 	root:'root',
 	fields:[
@@ -95,7 +95,7 @@ var prod_pix_form = new Ext.form.FormPanel({
 		handler:function(){
 			prod_pix_form.get('pptype').setValue(prod_title_combo.getValue());
 			prod_pix_form.getForm().submit({
-				url:'upload_prod_pix',
+				url:base_url+'admin/upload_prod_pix',
 				waitMsg:'圖檔上傳中',
 				success:function(){
 					show_Growl(1,'訊息','上傳成功');
@@ -117,7 +117,7 @@ var prod_pix_form = new Ext.form.FormPanel({
 var prod_pix_store = new Ext.data.JsonStore({
 	proxy: new Ext.data.HttpProxy({
 		method:'post',
-		url:'get_prod_pix'
+		url:base_url+'admin/get_prod_pix'
 	}),
 	root:'root',
 	fields:['id','name','hash_id']
@@ -126,7 +126,7 @@ var prod_pix_store = new Ext.data.JsonStore({
 var prod_tpl = new Ext.XTemplate(
 	'<tpl for=".">',
 		'<div class="thumb-wrap" id="{name}">',
-		'<div class="thumb"><img src="../public/files/{name}" title="{name}"></div>',
+		'<div class="thumb"><img src="'+base_url+'public/files/{name}" title="{name}"></div>',
 		'<span class="x-editable">{name}</span></div>',
 	'</tpl>',
 	'<div class="x-clear"></div>');
@@ -183,7 +183,7 @@ var prod_form = new Ext.form.FormPanel({
 		xtype:'ckeditor',
 		name:'content',
 		CKConfig:{
-			customConfig:'http://192.168.1.131/~Dars/shineglas/public/js/ckeditor/config.js',
+			customConfig:base_url+'public/js/ckeditor/config.js',
 			width:'82%'
 		}
 	},{
@@ -192,7 +192,7 @@ var prod_form = new Ext.form.FormPanel({
 		xtype:'ckeditor',
 		name:'content2',
 		CKConfig:{
-			customConfig:'http://192.168.1.131/~Dars/shineglas/public/js/ckeditor/config.js',
+			customConfig:base_url+'public/js/ckeditor/config.js',
 			width:'82%'
 		}
 	},{
@@ -206,7 +206,7 @@ var prod_form = new Ext.form.FormPanel({
 		handler:function(){
 			prod_form.getForm().el.mask('資料儲存中','x-mask-loading');
 			prod_form.getForm().submit({
-				url:'save_node_content',
+				url:base_url+'admin/save_node_content',
 				success:function(){
 					show_Growl(1,'訊息','資料已儲存');
 					ds.reload();

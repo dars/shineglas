@@ -7,8 +7,9 @@ class Welcome extends Controller {
 	
 	function index(){
 		$site_lang = $this->uri->segment(1);
-		$this->lang->load('site',$site_lang);
-		$site_lang = $this->uri->segment(1);
+		if($site_lang != 'zhtw' && $site_lang != 'en'){
+			echo "<script type='text/javascript'>location.href = '".site_url('zhtw')."';</script>";
+		}
 		$this->lang->load('site',$site_lang);	
 		$this->load->model('news_model');
 		$data=array();

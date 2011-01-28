@@ -12,7 +12,7 @@ var news_rec = new Ext.data.Record.create([
 var news_ds = new Ext.data.JsonStore({
 	proxy:new Ext.data.HttpProxy({
 		method:'post',
-		url:'news_list'
+		url:base_url+'admin/news_list'
 	}),
 	root:'root',
 	fields:news_rec
@@ -89,7 +89,7 @@ news_grid.on('celldblclick',function(g,r){
 var news_taxo_ds = new Ext.data.JsonStore({
 	proxy:new Ext.data.HttpProxy({
 		method:'post',
-		url:'get_news_taxo'
+		url:base_url+'admin/get_news_taxo'
 	}),
 	root:'root',
 	fields:[
@@ -150,7 +150,7 @@ var news_form = new Ext.form.FormPanel({
 		xtype:'ckeditor',
 		fieldLabel:'內容',
 		CKConfig:{
-			customConfig:'http://192.168.1.131/~Dars/efg/public/js/ckeditor/config.js'
+			customConfig:base_url+'public/js/ckeditor/config.js'
 		},
 		name:'content',
 		id:'content'
@@ -159,7 +159,7 @@ var news_form = new Ext.form.FormPanel({
 		text:'新增',
 		handler:function(){
 			news_form.getForm().submit({
-				url:'news_save',
+				url:base_url+'admin/news_save',
 				success:function(){
 					show_Growl(1,'訊息','儲存成功');
 					news_form.getForm().reset();

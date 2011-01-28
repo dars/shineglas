@@ -1,7 +1,7 @@
 var titles_store = new Ext.data.Store({
 	proxy: new Ext.data.HttpProxy({
 		method:'post',
-		url:'get_nodes_title'
+		url:base_url+'admin/get_nodes_title'
 	}),
 	reader: new Ext.data.JsonReader({root:'root'},[
 			{name:'name'},
@@ -84,7 +84,7 @@ var wel_form = new Ext.form.FormPanel({
 		xtype:'ckeditor',
 		name:'content',
 		CKConfig:{
-			customConfig:'http://192.168.1.131/~Dars/shineglas/public/js/ckeditor/config.js',
+			customConfig:base_url+'public/js/ckeditor/config.js',
 			width:'82%'
 		}
 	},{
@@ -98,7 +98,7 @@ var wel_form = new Ext.form.FormPanel({
 		handler:function(){
 			wel_form.getForm().el.mask('資料儲存中','x-mask-loading');
 			wel_form.getForm().submit({
-				url:'save_node_content',
+				url:base_url+'admin/save_node_content',
 				success:function(){
 					show_Growl(1,'訊息','資料已儲存');
 					ds.reload();

@@ -1,5 +1,8 @@
 <?php
 $site_lang = $this->uri->segment(1);
+if($site_lang != 'zhtw' && $site_lang != 'en'){
+	echo "<script type='text/javascript'>location.href = '".site_url('zhtw')."';</script>";
+}
 $this->lang->load('site',$site_lang);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"

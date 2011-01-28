@@ -10,7 +10,7 @@ var rec = new Ext.data.Record.create([
 var ds = new Ext.data.Store({
 	proxy:new Ext.data.HttpProxy({
 		method:'post',
-		url:'get_node_content'
+		url:base_url+'admin/get_node_content'
 	}),
 	reader: new Ext.data.JsonReader({
 		root:'root'

@@ -4,7 +4,7 @@ function node_delete(node){
 			tp.body.mask('資料處理中...','x-mask-loading');
 			Ext.Ajax.request({
 				method:'POST',
-				url:'delete_taxo',
+				url:base_url+'admin/delete_taxo',
 				success:function(){
 					show_Growl(1,'訊息','分類刪除完成');
 				},
@@ -49,7 +49,7 @@ function node_add(){
 			handler:function(){
 				if(node_form.getForm().isValid()){
 					node_form.getForm().submit({
-						url:'add_taxo',
+						url:base_url+'admin/add_taxo',
 						waitMsg:'資料儲存中...',
 						success:function(){
 							show_Growl(1,'訊息','資料儲存完成');
@@ -109,7 +109,7 @@ var taxo_root = new Ext.tree.AsyncTreeNode({
 	leaf:false
 });
 var taxo_tree_loader = new Ext.tree.TreeLoader({
-	dataUrl:'get_taxonomy_list',
+	dataUrl:base_url+'admin/get_taxonomy_list',
 	requestMethod:'post'
 });
 var taxo_tree = new Ext.tree.TreePanel({
@@ -134,7 +134,7 @@ taxo_tree.on('nodedrop',function(e){
 	}
 	Ext.Ajax.request({
 		method:'POST',
-		url:'sort_taxo',
+		url:base_url+'admin/sort_taxo',
 		success:function(){
 			show_Growl(1,'訊息','分類修改完成');
 		},
@@ -159,7 +159,7 @@ treeEditor.on('complete',function(treeEditor){
 	setTimeout(function(){
 		Ext.Ajax.request({
 			method:'POST',
-			url:'edit_taxo',
+			url:base_url+'admin/edit_taxo',
 			success:function(){
 				show_Growl(1,'訊息','分類修改完成');
 			},
