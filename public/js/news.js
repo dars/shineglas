@@ -70,6 +70,13 @@ var news_grid = new Ext.grid.GridPanel({
 						var sm = news_grid.getSelectionModel();
 						var record = sm.getSelected();
 						news_ds.remove(record);
+						Ext.Ajax.request({
+							url:base_url+'admin/news_del',
+							params:'id='+record.data.id,
+							success:function(){
+								show_Growl(1,'訊息','資料已刪除');
+							}
+						});
 					}
 				});
 			}

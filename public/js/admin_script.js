@@ -123,7 +123,6 @@ function show_news_tab(category){
 	tp.activate('news');
 }
 function show_prod_tab(category,str){
-	//prod_form.getForm().reset();
 	tp.body.mask('資料讀取中','x-mask-loading');
 	prod_titles_store.load({params:{category:category}});
 	var tabItem = tp.getItem('product');
@@ -137,5 +136,21 @@ function show_prod_tab(category,str){
 	}
 	
 	tp.activate('product');
+	tp.body.unmask();
+}
+function show_prod2_tab(category,str){
+	tp.body.mask('資料讀取中','x-mask-loading');
+	prod2_titles_store.load({params:{category:category}});
+	var tabItem = tp.getItem('product2');
+	if(tabItem !== null){
+		tabItem = tp.add({
+			id:'product2',
+			title:str,
+			items:[prod2_panel],
+			autoScroll:true
+		});
+	}
+	
+	tp.activate('product2');
 	tp.body.unmask();
 }

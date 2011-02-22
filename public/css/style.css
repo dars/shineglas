@@ -205,12 +205,13 @@ h2.cases_title{
 	width:700px;
 	margin-left:auto;
 	margin-right:auto;
-	margin-bottom:20px;
+	margin-bottom:60px;
 }
 .index_div table{
 	width:680px;
 	margin-left:auto;
 	margin-right:auto;
+	margin-bottom:20px;
 	border-collapse:collapse;
 }
 .index_div th{

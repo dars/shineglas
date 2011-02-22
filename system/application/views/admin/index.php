@@ -24,6 +24,7 @@
 		<script type="text/javascript" src="<?=site_url('public/js/left_menu.js')?>"></script>
 		<script type="text/javascript" src="<?=site_url('public/js/wel.js')?>"></script>
 		<script type="text/javascript" src="<?=site_url('public/js/product.js')?>"></script>
+		<script type="text/javascript" src="<?=site_url('public/js/product2.js')?>"></script>
 		<script type="text/javascript" src="<?=site_url('public/js/tab.js')?>"></script>
 		<script type="text/javascript" src="<?=site_url('public/js/store.js')?>"></script>
 		<script type="text/javascript" src="<?=site_url('public/js/taxonomy.js')?>"></script>

@@ -23,7 +23,7 @@ $this->lang->load('site',$site_lang);
 		?>
 		<tr id="<?=$r['id']?>"<?=$ch?>>
 			<td class="id_field center"><?=$i?></td>
-			<td><?=$r['cname']?></td>
+			<td style="padding:3px;letter-spacing:3px;"><nobr><?=$r['cname']?></nobr></td>
 			<td><?=anchor($site_lang.'/news/view/'.$r['id'],$r['title'])?></td>
 			<td><?=substr($r['created'],0,16)?></td>
 			<td><?=substr($r['modified'],0,16)?></td>
@@ -35,3 +35,4 @@ $this->lang->load('site',$site_lang);
 	</table>
 	<?php echo $this->pagination->create_links();?>
 </div>
+<div class="clear"></div>

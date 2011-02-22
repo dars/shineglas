@@ -154,7 +154,7 @@ tree.on('click',function(node){
 			show_prod_tab('product','玻璃產品');
 			break;
 		case 'product2':
-			show_prod_tab('product2','氣密門窗/玻璃五金');
+			show_prod2_tab('product2','氣密門窗/玻璃五金');
 			break;
 		case 'project':
 			show_project_tab('工程實績');

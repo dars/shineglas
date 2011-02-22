@@ -58,7 +58,7 @@ class Admin extends Controller{
 		}
 		$tmp['modified']=date('Y-m-d H:i:s');
 		$this->db->update('nodes',$tmp);
-		echo '{success:true}';
+		echo '{"success":true}';
 	}
 	function get_prod_pix(){
 		$this->db->where('hash_id',$this->input->post('hash_id'));
@@ -92,7 +92,7 @@ class Admin extends Controller{
 	function add_taxo(){
 		$this->load->model('taxonomy_model');
 		$this->taxonomy_model->add_taxonomy($this->input->post('name'),$this->input->post('category'),$this->input->post('lang'));
-		echo '{success:true}';
+		echo '{"success":true}';
 	}
 	function edit_taxo(){
 		$tmp=array();
@@ -106,12 +106,12 @@ class Admin extends Controller{
 			$this->db->where('type',$this->input->post('id'));
 			$this->db->update('nodes',$tmp);
 		}
-		echo '{success:true}';
+		echo '{"success":true}';
 	}
 	function delete_taxo(){
 		$this->load->model('taxonomy_model');
 		$this->taxonomy_model->del_taxonomy($this->input->post('id'));
-		echo '{success:true}';
+		echo '{"success":true}';
 	}
 	function sort_taxo(){
 		$sort=json_decode($this->input->post('sort'));
@@ -122,7 +122,7 @@ class Admin extends Controller{
 			$this->db->update('taxonomies',$tmp);
 			$i++;
 		}
-		echo '{success:true}';
+		echo '{"success":true}';
 	}
 	function get_news_taxo(){
 		$this->db->where('category','news');
@@ -150,8 +150,18 @@ class Admin extends Controller{
 		$tmp['category'] = $this->input->post('category');
 		$tmp['created'] = date('Y-m-d H:i:s');
 		$tmp['modified'] = date('Y-m-d H:i:s');
-		$this->db->insert('boards',$tmp);
-		echo '{success:true}';
+		if($this->input->post('id')){
+			$this->db->where('id',$this->input->post('id'));
+			$this->db->update('boards',$tmp);
+		}else{
+			$this->db->insert('boards',$tmp);
+		}
+		echo '{"success":true}';
+	}
+	function news_del(){
+		$this->db->where('id',$this->input->post('id'));
+		$this->db->delete('boards');
+		echo '{"success":true}';
 	}
 	function upload_prod_pix(){
 		$config['upload_path']='public/files/';
@@ -182,6 +192,13 @@ class Admin extends Controller{
 				$i++;
 			}
 		}
-		echo '{success:true}';
+		echo '{"success":true}';
+	}
+	function images_destory(){
+		foreach($this->input->post('foo') as $id):
+			$this->db->where('id',$id);
+			$this->db->delete('files');
+		endforeach;
+		echo '{"success":true}';
 	}
 }

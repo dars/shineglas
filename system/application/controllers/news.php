@@ -19,6 +19,7 @@ class News extends Controller{
 	function view(){
 		$this->db->select('a.*,b.name as cname');
 		$this->db->join('taxonomies as b','a.category=b.id','left');
+		$this->db->where('a.id',$this->uri->segment(4));
 		$query = $this->db->get('boards as a');
 		$res = $query->result_array();
 		$data=$res[0];

@@ -9,7 +9,7 @@ class Product extends Controller{
 			$pdata['page_title']='氣密門窗/玻璃五金 - 祥義玻璃';
 			$tmp_str="product2";
 		}
-		$query = $this->db->query("SELECT * FROM nodes WHERE type IN(SELECT id FROM taxonomies WHERE category='".$tmp_str."')");
+		$query = $this->db->query("SELECT a.*,b.weight FROM nodes as a LEFT JOIN taxonomies as b ON a.type = b.id WHERE a.type IN(SELECT id FROM taxonomies WHERE category='".$tmp_str."') ORDER BY b.weight ASC");
 		$res = $query->result_array();
 		$data=array();
 		$data['prod']=$res;

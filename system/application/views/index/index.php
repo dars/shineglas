@@ -10,7 +10,7 @@ $this->lang->load('site',$site_lang);
 		<img src="<?=site_url('public/images/'.$this->lang->line('board_title_news'))?>"><br/>
 		<?php
 			if($news['id']!=0){
-				echo anchor($site_lang.'news/view/'.$news['id'],mb_substr(strip_tags($news['content']),0,120,'utf8'));
+				echo anchor($site_lang.'/news/view/'.$news['id'],mb_substr(strip_tags($news['content']),0,120,'utf8'));
 			}else{
 				echo $news['content'];
 			}
