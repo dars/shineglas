@@ -11,15 +11,16 @@
 		<script type="text/javascript" src="<?=site_url('public/js/ext/ext-base.js')?>"></script>
 		<script type="text/javascript" src="<?=site_url('public/js/ext/ext-all.js')?>"></script>
 		<script type="text/javascript" src="<?=site_url('public/js/ext/ext-lang-zh_TW.js')?>"></script>
+		<script type="text/javascript">
+		var base_url = '<?=site_url()?>';
+		Ext.BLANK_IMAGE_URL="<?=site_url('public/resources/images/default/s.gif')?>";
+		</script>
 		<script type="text/javascript" src="<?=site_url('public/js/ckeditor/ckeditor.js')?>"></script>
 		<script type="text/javascript" src="<?=site_url('public/js/Growl.js')?>"></script>
 		<script type="text/javascript" src="<?=site_url('public/js/ckeditor.js')?>"></script>
 		<script type="text/javascript" src="<?=site_url('public/js/ext/FileUploadField.js')?>"></script>
 		<script type="text/javascript" src="<?=site_url('public/js/ext/DataView-more.js')?>"></script>
-		<script type="text/javascript">
-		var base_url = '<?=site_url()?>';
-		Ext.BLANK_IMAGE_URL="<?=site_url('public/resources/images/default/s.gif')?>";
-		</script>
+		
 		<script type="text/javascript" src="<?=site_url('public/js/login.js')?>"></script>
 		<script type="text/javascript" src="<?=site_url('public/js/left_menu.js')?>"></script>
 		<script type="text/javascript" src="<?=site_url('public/js/wel.js')?>"></script>

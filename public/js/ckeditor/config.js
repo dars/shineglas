@@ -23,5 +23,5 @@ CKEDITOR.editorConfig = function( config )
 		['TextColor','BGColor'],
 		['Cut','Copy','Paste','PasteText','PasteFromWord']
 	];
-	config.filebrowserUploadUrl = 'ckupdate';
+	config.filebrowserUploadUrl = base_url+'admin/ckupdate';
 };
