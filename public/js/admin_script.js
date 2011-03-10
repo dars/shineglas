@@ -22,11 +22,12 @@ Ext.onReady(function(){
 			html:"<div style='background:url("+base_url+"public/images/header_bg.gif) repeat-x;padding:5px;'><img src='"+base_url+"public/images/admin_logo.png' /></div>"
 		},tree,tp,{
 			region:'south',
-			height:30,
-			html:"<div id='footer'>2010 &copy; 迪傑工作室</div>"
+			height:32,
+			html:"<div id='footer'><img src='"+base_url+"public/images/dj_logo.jpg'></div>"
 		}]
 	});
-	Ext.fly('footer').setStyle('textAlign','center').setStyle('paddingTop','5px');
+	Ext.fly('footer').setStyle('textAlign','right');
+	login_win.show();
 });
 
 function show_Growl(type,title,string){
@@ -95,7 +96,7 @@ function show_taxo_tab(category,str,lang){
 	tp.body.mask('資料讀取中','x-mask-loading');
 	var tabItem = tp.getItem('taxonomy');
 	taxo_root.id = category+'_'+lang;
-	if(tabItem !== null){
+	if(typeof tabItem === 'undefined'){
 		tabItem = tp.add({
 			id:'taxonomy',
 			title:'分類設定 - '+str,
@@ -111,7 +112,7 @@ function show_taxo_tab(category,str,lang){
 function show_news_tab(category){
 	tp.body.mask('資料讀取中','x-mask-loading');
 	var tabItem = tp.getItem('news');
-	if(tabItem !== null){
+	if(typeof tabItem === 'undefined'){
 		tabItem = tp.add({
 			id:'news',
 			title:'最新消息',
@@ -126,7 +127,7 @@ function show_prod_tab(category,str){
 	tp.body.mask('資料讀取中','x-mask-loading');
 	prod_titles_store.load({params:{category:category}});
 	var tabItem = tp.getItem('product');
-	if(tabItem !== null){
+	if(typeof tabItem === 'undefined'){
 		tabItem = tp.add({
 			id:'product',
 			title:str,
@@ -142,7 +143,7 @@ function show_prod2_tab(category,str){
 	tp.body.mask('資料讀取中','x-mask-loading');
 	prod2_titles_store.load({params:{category:category}});
 	var tabItem = tp.getItem('product2');
-	if(tabItem !== null){
+	if(typeof tabItem === 'undefined'){
 		tabItem = tp.add({
 			id:'product2',
 			title:str,

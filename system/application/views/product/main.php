@@ -75,7 +75,7 @@ $(function(){
 				<li><a href="#tab3"><?=$this->lang->line('tech')?></a></li>
 			</ul>
 			<div class="panes">
-				<div id="tab1"><?=$prod[$c]['content']?></div>
+				<div id="tab1"><?=$prod[$c]['content']?><div style="clear:both;"></div></div>
 				<div id="tab2">
 					<div id="image_wrap">
 						<img src="http://static.flowplayer.org/tools/img/blank.gif" width="500" height="375" />
@@ -108,7 +108,7 @@ $(function(){
 					<a class="next browse right<?php echo $dis_str?>"></a>
 					<div class="clear" style="margin-bottom:10px;"></div>
 				</div>
-				<div id="tab3"><?=$prod[$c]['content2']?></div>
+				<div id="tab3"><?=$prod[$c]['content2']?><div style="clear:both;"></div></div>
 			</div>
 		</div>
 	</div>

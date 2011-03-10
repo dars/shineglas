@@ -9,7 +9,7 @@
 		<link rel="stylesheet" href="<?=site_url('public/resources/css/xtheme-gray.css')?>" />
 		
 		<script type="text/javascript" src="<?=site_url('public/js/ext/ext-base.js')?>"></script>
-		<script type="text/javascript" src="<?=site_url('public/js/ext/ext-all.js')?>"></script>
+		<script type="text/javascript" src="<?=site_url('public/js/ext/ext-all-debug.js')?>"></script>
 		<script type="text/javascript" src="<?=site_url('public/js/ext/ext-lang-zh_TW.js')?>"></script>
 		<script type="text/javascript">
 		var base_url = '<?=site_url()?>';
@@ -32,9 +32,6 @@
 		<script type="text/javascript" src="<?=site_url('public/js/news.js')?>"></script>
 		
 		<script type="text/javascript" src="<?=site_url('public/js/admin_script.js')?>"></script>
-		<script type="text/javascript">
-		Ext.onReady(function(){login_win.show();});
-		</script>
 	</head>
 	<body>
 	</body>

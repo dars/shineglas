@@ -44,6 +44,7 @@ var prod_title_combo = new Ext.form.ComboBox({
 	triggerAction:'all',
 	displayField:'name',
 	valueField:'id',
+	loadingText:'資料讀取中',
 	editable:false
 });
 prod_title_combo.on('select',function(){

@@ -38,3 +38,4 @@ $lang['form_sub'] = 'Send';
 $lang['board_title_news'] = "board_news_title_en.jpg";
 $lang['board_title_prod'] = "board_prod_title_en.jpg";
 $lang['board_title_door'] = "board_door_title_en.jpg";
+$lang['about_id'] = 29;

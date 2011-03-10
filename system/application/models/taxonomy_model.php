@@ -6,7 +6,15 @@ class taxonomy_model extends Model{
 	function get_names($category){
 		$this->db->select('id,name');
 		$this->db->where('category',$category);
-		$this->db->order_by('id','ASC');
+		$this->db->order_by('weight','ASC');
+		$res = $this->db->get('taxonomies');
+		return $res->result_array();
+	}
+	function get_names_lang($category){
+		$this->db->select('id,name');
+		$this->db->where('category',$category);
+		$this->db->where('lang',$this->uri->segment(1));
+		$this->db->order_by('weight','ASC');
 		$res = $this->db->get('taxonomies');
 		return $res->result_array();
 	}

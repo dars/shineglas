@@ -38,3 +38,4 @@ $lang['form_sub'] = '確定寄出';
 $lang['board_title_news'] = "board_news_title.jpg";
 $lang['board_title_prod'] = "board_prod_title.jpg";
 $lang['board_title_door'] = "board_door_title.jpg";
+$lang['about_id'] = 27;

@@ -30,7 +30,7 @@
 .sitemap #primaryNav.col5 li { width:20.0%; }
 .sitemap #primaryNav.col6 li { width:16.6%; }
 .sitemap #primaryNav.col7 li { width:14.2%; }
-.sitemap #primaryNav.col8 li { width:12.5%; }
+.sitemap #primaryNav.col8 li { width:12.5%;overflow: hidden; }
 .sitemap #primaryNav.col9 li { width:11.1%; }
 .sitemap #primaryNav.col10 li { width:10.0%; }
 

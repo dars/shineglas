@@ -16,7 +16,7 @@ $this->lang->load('site',$site_lang);
 <div id="main_nav" class="grid_23">
 	<?=anchor($site_lang.'/news','<img src="'.site_url('public/images/'.$this->lang->line('nav_news').'.gif').'" id="main_nav_news" />');?>
 	<img src="<?=site_url('public/images/main_nav_spacer.gif')?>" class="main_nav_spacer">
-	<?=anchor($site_lang.'/nodes/27','<img src="'.site_url('public/images/'.$this->lang->line('nav_aboutus').'.gif').'" id="main_nav_aboutus" />');?>
+	<?=anchor($site_lang.'/nodes/'.$this->lang->line('about_id'),'<img src="'.site_url('public/images/'.$this->lang->line('nav_aboutus').'.gif').'" id="main_nav_aboutus" />');?>
 	<img src="<?=site_url('public/images/main_nav_spacer.gif')?>" class="main_nav_spacer">
 	<?=anchor($site_lang.'/product/1','<img src="'.site_url('public/images/'.$this->lang->line('nav_prod').'.gif').'" id="main_nav_product" />');?>
 	<img src="<?=site_url('public/images/main_nav_spacer.gif')?>" class="main_nav_spacer">

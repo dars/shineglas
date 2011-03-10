@@ -4,6 +4,7 @@ body{
 }
 .main_content{
 	padding-left:15px;
+	min-height: 500px;
 }
 #container{
 	border-left:1px #FFF solid;
@@ -158,6 +159,7 @@ body{
 }
 #side_nav_body div a{
 	width:176px;
+	overflow-x: hidden;
 	margin-left:-20px;
 	padding-left:50px;
 	display:block;
